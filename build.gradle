@@ -1,0 +1,64 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+
+    id "com.gorylenko.gradle-git-properties" version "2.2.0"
+}
+
+group 'jp.katana.gui'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+configurations {
+    extraLibs
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    implementation 'no.tornado:tornadofx:1.7.19'
+
+    extraLibs files("libs/dockfx-0.4.jar")
+    implementation 'org.controlsfx:controlsfx:8.40.15'
+    implementation 'org.fxmisc.richtext:richtextfx:1.0.0-SNAPSHOT'
+
+    testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
+
+    configurations.implementation.extendsFrom(configurations.extraLibs)
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'jp.katana.gui.Main'
+        attributes 'Multi-Release': 'true'
+    }
+
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+gitProperties {
+    gitPropertiesResourceDir = "${project.rootDir}/src/main/resources"
+}
