@@ -1,6 +1,7 @@
 package jp.katana.gui.view
 
 import javafx.geometry.Insets
+import javafx.scene.layout.Priority
 import jp.katana.gui.controller.PlayerLIstViewController
 import tornadofx.*
 
@@ -17,6 +18,7 @@ class PlayerListView : View("PlayerListView") {
             vboxConstraints {
                 margin = Insets(0.0, 10.0, 5.0, 10.0)
             }
+            vgrow = Priority.ALWAYS
         }
         label(controller.playerCountInfo) {
             vboxConstraints {
