@@ -1,11 +1,12 @@
 package jp.katana.gui.view
 
 import tornadofx.View
-import tornadofx.button
-import tornadofx.vbox
+import tornadofx.borderpane
+
 
 class MainView : View() {
-    override val root = vbox {
-        button()
+    override val root = borderpane {
+        left<PlayerListView>()
+        center<ConsoleView>()
     }
 }

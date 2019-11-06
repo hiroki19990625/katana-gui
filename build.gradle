@@ -14,6 +14,10 @@ repositories {
     maven {
         url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
+
+    maven {
+        url "https://hiroki19990625.github.io/maven-repo/"
+    }
 }
 
 configurations {
@@ -29,10 +33,19 @@ dependencies {
     implementation 'org.controlsfx:controlsfx:8.40.15'
     implementation 'org.fxmisc.richtext:richtextfx:1.0.0-SNAPSHOT'
 
+    implementation "jp.katana:katana:1.0-SNAPSHOT"
+
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
 
     configurations.implementation.extendsFrom(configurations.extraLibs)
 }
+
+// キャッシュを無効化
+/*configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+    }
+}*/
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
