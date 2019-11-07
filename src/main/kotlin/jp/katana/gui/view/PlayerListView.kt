@@ -6,7 +6,7 @@ import jp.katana.gui.controller.PlayerLIstViewController
 import tornadofx.*
 
 class PlayerListView : View("PlayerListView") {
-    private val controller: PlayerLIstViewController by inject()
+    val controller: PlayerLIstViewController by inject()
 
     override val root = vbox {
         label("PlayerList") {

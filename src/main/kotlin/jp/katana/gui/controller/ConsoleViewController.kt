@@ -5,16 +5,16 @@ import tornadofx.Controller
 
 class ConsoleViewController : Controller() {
     val serverLog: SimpleStringProperty = SimpleStringProperty()
-    
+
     fun onServerStart() {
-        serverLog.value = ""
+        clearLog()
     }
 
     fun onAddLog(line: String) {
         serverLog.value += "$line\n"
     }
 
-    fun onClearLog() {
+    fun clearLog() {
         serverLog.value = ""
     }
 }

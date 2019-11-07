@@ -3,10 +3,11 @@ package jp.katana.gui.view
 import javafx.geometry.Insets
 import javafx.scene.layout.Priority
 import jp.katana.gui.controller.ConsoleViewController
+import jp.katana.gui.utils.TextAreaAppender
 import tornadofx.*
 
 class ConsoleView : View("ConsoleView") {
-    private val controller: ConsoleViewController by inject()
+    val controller: ConsoleViewController by inject()
 
     override val root = vbox {
         label("Console") {
@@ -20,6 +21,7 @@ class ConsoleView : View("ConsoleView") {
             }
             vgrow = Priority.ALWAYS
             isEditable = false
+            TextAreaAppender.setTextArea(this)
         }
     }
 }
