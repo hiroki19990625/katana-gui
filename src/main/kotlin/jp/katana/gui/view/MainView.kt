@@ -8,5 +8,6 @@ class MainView : View() {
     override val root = borderpane {
         left<PlayerListView>()
         center<ConsoleView>()
+        right<ControlPanelView>()
     }
 }
