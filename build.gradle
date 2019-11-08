@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.50'
 
     id "com.gorylenko.gradle-git-properties" version "2.2.0"
+    id 'edu.sc.seis.launch4j' version '2.4.6'
 }
 
 group 'jp.katana.gui'
@@ -63,6 +64,17 @@ jar {
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
     }
+}
+
+shadowJar {
+    baseName = project.name
+}
+
+launch4j {
+    copyConfigurable = project.tasks.shadowJar.outputs.files
+    jar = "lib/${project.tasks.shadowJar.archiveName}"
+
+    headerType = 'gui'
 }
 
 tasks.test {
