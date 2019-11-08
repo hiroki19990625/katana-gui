@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty
 import tornadofx.Controller
 
 class ConsoleViewController : Controller() {
-    val serverLog: SimpleStringProperty = SimpleStringProperty()
+    val serverLog: SimpleStringProperty = SimpleStringProperty("")
 
     fun onServerStart() {
         clearLog()

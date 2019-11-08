@@ -17,8 +17,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 
 @Plugin(name = "TextAreaAppender", category = "Core", elementType = "appender", printObject = true)
 class TextAreaAppender constructor(
-    name: String, filter: Filter,
-    layout: Layout<out Serializable>,
+    name: String, filter: Filter?,
+    layout: Layout<out Serializable>?,
     ignoreExceptions: Boolean
 ) : AbstractAppender(name, filter, layout, ignoreExceptions, arrayOf()) {
     private val rwLock = ReentrantReadWriteLock()
@@ -55,6 +55,7 @@ class TextAreaAppender constructor(
     }
 
     companion object {
+        @JvmStatic
         private var textArea: TextArea? = null
 
         @PluginFactory
@@ -62,17 +63,18 @@ class TextAreaAppender constructor(
         fun createAppender(
             @PluginAttribute("name") name: String?,
             @PluginElement("Layout") layout: Layout<out Serializable>?,
-            @PluginElement("Filter") filter: Filter
+            @PluginElement("Filter") filter: Filter?
         ): TextAreaAppender? {
-            var layout = layout
+            var layoutVar = layout
             if (name == null) {
                 AbstractLifeCycle.LOGGER.error("No name provided for TextAreaAppender")
                 return null
             }
             if (layout == null) {
-                layout = PatternLayout.createDefaultLayout()
+                layoutVar = PatternLayout.createDefaultLayout()
             }
-            return TextAreaAppender(name, filter, layout!!, true)
+
+            return TextAreaAppender(name, filter, layoutVar!!, true)
         }
 
         fun setTextArea(textArea: TextArea) {

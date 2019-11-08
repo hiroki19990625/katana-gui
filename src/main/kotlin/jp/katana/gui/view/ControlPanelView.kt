@@ -30,6 +30,8 @@ class ControlPanelView : View("ControlPanelView") {
                     action {
                         isDisable = true
                         runAsync {
+                            consoleView.controller.clearLog()
+                            
                             val mainView = find(MainView::class)
                             mainView.controller.startServer()
                             scene.lookup("#stopButton").isDisable = false
