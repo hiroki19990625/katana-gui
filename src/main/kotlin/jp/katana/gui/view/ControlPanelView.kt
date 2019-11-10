@@ -3,6 +3,7 @@ package jp.katana.gui.view
 import javafx.geometry.Insets
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
+import jp.katana.core.ServerState
 import tornadofx.*
 
 class ControlPanelView : View("ControlPanelView") {
@@ -34,9 +35,16 @@ class ControlPanelView : View("ControlPanelView") {
                         runAsync {
                             consoleView.controller.clearLog()
 
-                            val mainView = find(MainView::class)
-                            mainView.controller.startServer()
-                            scene.lookup("#stopButton").isDisable = false
+                            try {
+                                val mainView = find(MainView::class)
+                                mainView.controller.startServer()
+                                if (mainView.controller.server.state == ServerState.Running)
+                                    scene.lookup("#stopButton").isDisable = false
+                                else
+                                    isDisable = false
+                            } catch (e: Exception) {
+                                isDisable = false
+                            }
                         }
                     }
                 }
@@ -57,9 +65,13 @@ class ControlPanelView : View("ControlPanelView") {
                         if (alert.result == ButtonType.YES) {
                             isDisable = true
                             runAsync {
-                                val mainView = find(MainView::class)
-                                mainView.controller.stopServer()
-                                scene.lookup("#startButton").isDisable = false
+                                try {
+                                    val mainView = find(MainView::class)
+                                    mainView.controller.stopServer()
+                                    scene.lookup("#startButton").isDisable = false
+                                } catch (e: Exception) {
+                                    scene.lookup("#startButton").isDisable = false
+                                }
                             }
                         }
                     }

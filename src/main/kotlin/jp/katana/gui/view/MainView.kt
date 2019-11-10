@@ -20,6 +20,7 @@ class MainView : View() {
     }
 
     override val root = borderpane {
+        top<MenuBarView>()
         left<PlayerListView>()
         center<ConsoleView>()
         right<ControlPanelView>()
