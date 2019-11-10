@@ -1,6 +1,8 @@
 package jp.katana.gui.view
 
 import javafx.geometry.Insets
+import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
 import tornadofx.*
 
 class ControlPanelView : View("ControlPanelView") {
@@ -31,7 +33,7 @@ class ControlPanelView : View("ControlPanelView") {
                         isDisable = true
                         runAsync {
                             consoleView.controller.clearLog()
-                            
+
                             val mainView = find(MainView::class)
                             mainView.controller.startServer()
                             scene.lookup("#stopButton").isDisable = false
@@ -45,11 +47,20 @@ class ControlPanelView : View("ControlPanelView") {
                         minWidth = 100.px
                     }
                     action {
-                        isDisable = true
-                        runAsync {
-                            val mainView = find(MainView::class)
-                            mainView.controller.stopServer()
-                            scene.lookup("#startButton").isDisable = false
+                        val alert = alert(
+                            Alert.AlertType.WARNING,
+                            "Warning",
+                            "Stop Server?",
+                            ButtonType.YES,
+                            ButtonType.NO
+                        )
+                        if (alert.result == ButtonType.YES) {
+                            isDisable = true
+                            runAsync {
+                                val mainView = find(MainView::class)
+                                mainView.controller.stopServer()
+                                scene.lookup("#startButton").isDisable = false
+                            }
                         }
                     }
                 }
