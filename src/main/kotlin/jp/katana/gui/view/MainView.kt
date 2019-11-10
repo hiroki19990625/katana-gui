@@ -17,7 +17,6 @@ class MainView : View() {
     init {
         title = "katana-gui"
         setStageIcon(Image(this::class.java.classLoader.getResourceAsStream("katana-gui.png")))
-        //primaryStage.icons +=
     }
 
     override val root = borderpane {
