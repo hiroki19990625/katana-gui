@@ -2,4 +2,10 @@
 /.gradle/
 /build/
 /.idea/
-git.properties
+katana-gui-git.properties
+
+/logs/
+/worlds/
+/resource_packs/
+katana.yml
+properties.yml
