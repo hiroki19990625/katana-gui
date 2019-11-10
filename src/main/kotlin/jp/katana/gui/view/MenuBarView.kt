@@ -12,6 +12,24 @@ class MenuBarView : View("MenuBarView") {
                     Desktop.getDesktop().open(File("./"))
                 }
             }
+            item("Open World Folder") {
+                action {
+                    Desktop.getDesktop().open(File("worlds"))
+                }
+            }
+            item("Open Log Folder") {
+                action {
+                    Desktop.getDesktop().open(File("logs"))
+                }
+            }
+        }
+        menu("Help") {
+            item("Katana Server Info") {
+                action {
+                    val stage = find<KatanaServerInfoView>().openModal()
+                    stage!!.isResizable = false
+                }
+            }
         }
     }
 }
