@@ -27,9 +27,9 @@ cd ../
 ./gradlew createAllExecutables
 cd repo
 
-mkdir "app/katana-gui/windows/$git_hash"
+mkdir "app/katana-gui/windows/$git_hash" -p
 cp ../build/launch4j/katana-gui.exe "app/katana-gui/windows/$git_hash/katana-gui.exe"
-mkdir "app/katana-gui/jar/$git_hash"
+mkdir "app/katana-gui/jar/$git_hash" -p
 cp ../build/libs/katana-gui-1.0-SNAPSHOT.jar "app/katana-gui/jar/$git_hash/katana-gui-1.0-SNAPSHOT.jar"
 
 git add .
