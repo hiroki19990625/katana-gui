@@ -31,7 +31,7 @@ mkdir "app/katana-gui/windows/$git_hash" -p
 zip "katana-gui-$git_hash" ../build/launch4j/katana-gui.exe
 cp "katana-gui-$git_hash.zip" "app/katana-gui/windows/$git_hash/katana-gui-$git_hash.zip"
 mkdir "app/katana-gui/windows/last_version" -p
-cp "katana-gui-$git_hash.zip" "app/katana-gui/windows/last_version/katana-gui-$git_hash.zip"
+cp "katana-gui-$git_hash.zip" "app/katana-gui/windows/last_version/katana-gui.zip"
 mkdir "app/katana-gui/jar/$git_hash" -p
 cp ../build/libs/katana-gui-1.0-SNAPSHOT-all.jar "app/katana-gui/jar/$git_hash/katana-gui-1.0-SNAPSHOT.jar"
 mkdir "app/katana-gui/jar/last_version" -p
