@@ -11,6 +11,11 @@ class PlayerLIstViewController : Controller() {
     val playerList: ObservableList<String> = FXCollections.observableArrayList<String>()
     val playerCountInfo: SimpleStringProperty = SimpleStringProperty(createPlayerCountString(0, 0))
 
+    fun onServerStart(server: IServer) {
+        playerList.clear()
+        playerCountInfo.value = createPlayerCountString(0, server.maxPlayer)
+    }
+
     fun onPlayerJoin(player: IActorPlayer, server: IServer) {
         playerList.add(player.displayName)
         playerCountInfo.value = createPlayerCountString(server.networkManager!!.getPlayers().size, server.maxPlayer)

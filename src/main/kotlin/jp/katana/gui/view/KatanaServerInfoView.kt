@@ -5,9 +5,6 @@ import jp.katana.utils.GitCommitInfo
 import tornadofx.*
 
 class KatanaServerInfoView : View("KatanaServerInfo") {
-    init {
-    }
-
     override val root = vbox {
         label("Katana Server Info") {
             style {

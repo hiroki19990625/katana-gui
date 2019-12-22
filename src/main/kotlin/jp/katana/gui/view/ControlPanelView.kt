@@ -1,13 +1,12 @@
 package jp.katana.gui.view
 
 import javafx.geometry.Insets
-import javafx.scene.control.Alert
-import javafx.scene.control.ButtonType
-import jp.katana.core.ServerState
+import jp.katana.gui.controller.ControlPanelViewController
 import tornadofx.*
 
 class ControlPanelView : View("ControlPanelView") {
     private val consoleView: ConsoleView = find(ConsoleView::class)
+    private val controller: ControlPanelViewController by inject()
 
     override val root = vbox {
         label("ControlPanel") {
@@ -31,21 +30,7 @@ class ControlPanelView : View("ControlPanelView") {
                         minWidth = 100.px
                     }
                     action {
-                        isDisable = true
-                        runAsync {
-                            consoleView.controller.clearLog()
-
-                            try {
-                                val mainView = find(MainView::class)
-                                mainView.controller.startServer()
-                                if (mainView.controller.server.state == ServerState.Running)
-                                    scene.lookup("#stopButton").isDisable = false
-                                else
-                                    isDisable = false
-                            } catch (e: Exception) {
-                                isDisable = false
-                            }
-                        }
+                        controller.onClickStartButton(scene, this, consoleView.controller)
                     }
                 }
                 button("Stop") {
@@ -55,25 +40,7 @@ class ControlPanelView : View("ControlPanelView") {
                         minWidth = 100.px
                     }
                     action {
-                        val alert = alert(
-                            Alert.AlertType.WARNING,
-                            "Warning",
-                            "Stop Server?",
-                            ButtonType.YES,
-                            ButtonType.NO
-                        )
-                        if (alert.result == ButtonType.YES) {
-                            isDisable = true
-                            runAsync {
-                                try {
-                                    val mainView = find(MainView::class)
-                                    mainView.controller.stopServer()
-                                    scene.lookup("#startButton").isDisable = false
-                                } catch (e: Exception) {
-                                    scene.lookup("#startButton").isDisable = false
-                                }
-                            }
-                        }
+                        controller.onClickStopButton(scene, this)
                     }
                 }
                 vboxConstraints {

@@ -1,33 +1,35 @@
 package jp.katana.gui.view
 
+import jp.katana.gui.controller.MenuBarViewController
 import tornadofx.*
 import java.awt.Desktop
 import java.io.File
 
 class MenuBarView : View("MenuBarView") {
+    val controller: MenuBarViewController by inject()
+
     override val root = menubar {
         menu("File") {
             item("Open Server Folder") {
                 action {
-                    Desktop.getDesktop().open(File("./"))
+                    controller.onOpenServerFolder()
                 }
             }
             item("Open World Folder") {
                 action {
-                    Desktop.getDesktop().open(File("worlds"))
+                    controller.onOpenWorldFolder()
                 }
             }
             item("Open Log Folder") {
                 action {
-                    Desktop.getDesktop().open(File("logs"))
+                    controller.onOpenLogFolder()
                 }
             }
         }
         menu("Help") {
             item("Katana Server Info") {
                 action {
-                    val stage = find<KatanaServerInfoView>().openModal()
-                    stage!!.isResizable = false
+                    controller.onOpenKatanaServerInfo();
                 }
             }
         }
