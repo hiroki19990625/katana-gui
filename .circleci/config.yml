@@ -38,7 +38,7 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      - run: sudo apt-get install openjfx -y
+      - run: apt-get install --no-install-recommends -y openjfx
 
       # run tests!
       - run: gradle test
