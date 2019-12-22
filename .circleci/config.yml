@@ -38,7 +38,9 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
+      - run: sudo apt-get install openjfx -y
+
       # run tests!
-      # - run: gradle test
+      - run: gradle test
 
       - run: cd batch && chmod 0744 Publish.sh && ./Publish.sh
