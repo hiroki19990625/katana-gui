@@ -1,6 +1,7 @@
 package jp.katana.gui.view
 
 import javafx.geometry.Insets
+import javafx.scene.input.KeyCode
 import javafx.scene.layout.Priority
 import jp.katana.gui.controller.ConsoleViewController
 import jp.katana.gui.utils.TextAreaAppender
@@ -22,6 +23,17 @@ class ConsoleView : View("ConsoleView") {
             vgrow = Priority.ALWAYS
             isEditable = false
             TextAreaAppender.setTextArea(this)
+        }
+        textfield(controller.input) {
+            vboxConstraints {
+                margin = Insets(0.0, 10.0, 10.0, 5.0)
+            }
+            vgrow = Priority.ALWAYS
+            setOnKeyPressed {
+                if (it.code == KeyCode.ENTER) {
+                    controller.inputEnter()
+                }
+            }
         }
     }
 }

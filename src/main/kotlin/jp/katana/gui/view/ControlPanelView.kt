@@ -5,8 +5,9 @@ import jp.katana.gui.controller.ControlPanelViewController
 import tornadofx.*
 
 class ControlPanelView : View("ControlPanelView") {
+    val controller: ControlPanelViewController by inject()
+
     private val consoleView: ConsoleView = find(ConsoleView::class)
-    private val controller: ControlPanelViewController by inject()
 
     override val root = vbox {
         label("ControlPanel") {

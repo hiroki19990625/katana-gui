@@ -5,6 +5,9 @@ import tornadofx.Controller
 
 class ConsoleViewController : Controller() {
     val serverLog: SimpleStringProperty = SimpleStringProperty("")
+    val input: SimpleStringProperty = SimpleStringProperty("")
+
+    var invokeCommand: (String) -> Unit = {}
 
     fun onServerStart() {
         clearLog()
@@ -16,5 +19,12 @@ class ConsoleViewController : Controller() {
 
     fun clearLog() {
         serverLog.value = ""
+    }
+
+    fun inputEnter() {
+        if (!input.value.isNullOrBlank()) {
+            invokeCommand.invoke(input.value)
+            input.value = ""
+        }
     }
 }
