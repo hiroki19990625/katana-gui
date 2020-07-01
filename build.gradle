@@ -34,7 +34,10 @@ dependencies {
     implementation 'org.controlsfx:controlsfx:8.40.15'
     implementation 'org.fxmisc.richtext:richtextfx:1.0.0-SNAPSHOT'
 
-    implementation "jp.katana:katana:1.0-SNAPSHOT"
+    implementation "jp.katana.server:katana-server:1.0-SNAPSHOT"
+    implementation "jp.katana.core:katana-core:1.0-SNAPSHOT"
+    implementation "jp.katana.math:katana-math:1.0-SNAPSHOT"
+    implementation "jp.katana.utils:katana-utils:1.0-SNAPSHOT"
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
 
