@@ -20,7 +20,9 @@ class MainViewController : Controller() {
         private set
 
     fun startServer() {
-        server = Server()
+        val tempServer = Server()
+        tempServer.useGui = true
+        server = tempServer
 
         val playerListView = find<PlayerListView>()
         val controlPanelView = find<ControlPanelView>()
