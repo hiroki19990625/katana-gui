@@ -45,11 +45,11 @@ dependencies {
 }
 
 // キャッシュを無効化
-/*configurations.all {
+configurations.all {
     resolutionStrategy {
         cacheChangingModulesFor 0, 'seconds'
     }
-}*/
+}
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
